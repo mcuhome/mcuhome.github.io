@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[如何使用虚拟机(vmware workstation)安装Ubuntu系统]]></title>
     <url>%2F2019%2F06%2F13%2F%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E6%9C%BA-vmware-workstation-%E5%AE%89%E8%A3%85Ubuntu%E7%B3%BB%E7%BB%9F%2F</url>
-    <content type="text"><![CDATA[本文只使用最简单的方式去安装虚拟机（vmware workstation）和ubuntu。 1.下载360安全卫士，在360软件管家搜索“虚拟机”，如下图 找到“vmware workstation”，随后点击下载安装。 如需注册码请到官方网站购买或者在下方评论中找 安装完成之后到Ubuntu官方下载Ubuntu系统，我用的是ubuntu-16.04.5-desktop-amd64版本，目前最低版本是18.04，直接点击download，如下图 下载完成后，打开Vmware workstation软件，打开“文件-&gt;新建虚拟机” 然后使用典型安装， 找到下载好的光盘镜像文件 输入名字和密码，密码一定要记住，后面编程时获取权限用的到； 填入虚拟机名字，设置安装ubuntu的位置，这个光盘最好有20G以上空间。 为Ubuntu分配空间，一般20G就够用了。 点击完成就等待Ubuntu安装了，看机子的配置，一般20多分钟就可以搞定。 看，正在安装！ 大功告成了！ 下一步，配置ESP32编译环境！]]></content>
+    <content type="text"><![CDATA[本文只使用最简单的方式去安装虚拟机（vmware workstation）和ubuntu。 1.下载360安全卫士，在360软件管家搜索“虚拟机”，如下图 2.找到“vmware workstation”，随后点击下载安装。 如需注册码请到官方网站购买或者在下方评论中找 3.安装完成之后到Ubuntu官方下载Ubuntu系统. 我用的是ubuntu-16.04.5-desktop-amd64版本，目前最低版本是18.04，直接点击download，如下图 4.下载完成后，打开Vmware workstation软件，打开“文件-&gt;新建虚拟机” 5.然后使用典型安装， 6.找到下载好的光盘镜像文件 7.输入名字和密码，密码一定要记住，后面开机和编程时获取权限用的到； 8.填入虚拟机名字，设置安装ubuntu的位置，这个光盘最好有20G以上空间。 9.为Ubuntu分配空间，一般20G就够用了。 10.点击完成就等待Ubuntu安装了，看机子的配置，一般20多分钟就可以搞定。 11.看，正在安装！ 输入密码，大功告成了！ 下一步，配置ESP32编译环境！]]></content>
   </entry>
   <entry>
     <title><![CDATA[搭建基于Ubuntu的 ESP32 开发环境]]></title>
