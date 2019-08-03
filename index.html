@@ -327,6 +327,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/KEIL-MDK生成BIN文件的两种方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="总结多年经验电子工程师的血泪和汗水">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="电子工程师成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/03/KEIL-MDK生成BIN文件的两种方式/" class="post-title-link" itemprop="url">KEIL / MDK生成BIN文件的两种方式</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-03 14:39:04 / 修改时间：14:54:25" itemprop="dateCreated datePublished" datetime="2019-08-03T14:39:04+08:00">2019-08-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="KEIL-MDK生成BIN文件的两种方式"><a href="#KEIL-MDK生成BIN文件的两种方式" class="headerlink" title="KEIL / MDK生成BIN文件的两种方式"></a>KEIL / MDK生成BIN文件的两种方式</h1><h2 id="1-KEIL工程配置入口"><a href="#1-KEIL工程配置入口" class="headerlink" title="1 KEIL工程配置入口"></a>1 KEIL工程配置入口</h2><p>点击“魔术棒”图标（Option for Target）</p>
+<p> <img src="/2019/08/03/KEIL-MDK生成BIN文件的两种方式/1.png" alt></p>
+<p>在After Build/Rebuild选项卡中，勾选 “Run # 1”,在后面输入框写入bin文件生成方式，见2.1、2.2</p>
+<p><img src="/2019/08/03/KEIL-MDK生成BIN文件的两种方式/2.png" alt></p>
+<h2 id="2-输出Bin文件配置"><a href="#2-输出Bin文件配置" class="headerlink" title="2  输出Bin文件配置"></a>2  输出Bin文件配置</h2><p>​      KEIL生成bin文件，根据输入命令的相对\绝对路径来分，有两种方式，都是通过自带的fromelf.exe来生成</p>
+<h3 id="2-1-绝对路径方式"><a href="#2-1-绝对路径方式" class="headerlink" title="2.1 绝对路径方式"></a>2.1 绝对路径方式</h3><p>绝对路径方式，如果更换电脑等，需要手动修改MDK工具链(formelf.exe)所在路径与项目文件名(例如test_app)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;D:\Program Files\MDK516\ARM\ARMCC\bin\fromelf.exe&quot; --bin -o ./obj/test_app.bin ./obj/test_app.axf&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-相对路径方式"><a href="#2-2-相对路径方式" class="headerlink" title="2.2 相对路径方式"></a>2.2 相对路径方式</h3><p>使用相对路径生成，则不需要任何修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$K\ARM\ARMCC\bin\fromelf.exe --bin --output=@L.bin !L</span><br></pre></td></tr></table></figure>
+<p>编译后，Build Out框可以看到：<br>After Build - User command #1: D:\Program Files\MDK516\ARM\ARMCC\bin\fromelf.exe –bin –output=test1.bin .\obj\test1.axf</p>
+<p><strong>上述操作后，在xxx.uvprojx当前目录下，可看到一个test1.bin</strong></p>
+<p>如果希望生成.bin文件输出在<strong>当前工程下的指定目录</strong>，比如Bin文件夹，可如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$K\ARM\ARMCC\bin\fromelf.exe --bin --output=Bin\@L.bin !L</span><br></pre></td></tr></table></figure>
+<p>编译后，Build Out框可以看到：<br>After Build - User command #1: D:\Program Files\MDK516\ARM\ARMCC\bin\fromelf.exe –bin –output=Bin\test1.bin .\obj\test1.axf</p>
+<p>上述操作后，在xxx.uvprojx当前目录下，可看到一个新生成的Bin文件夹，里面是test1.bin</p>
+<p>​     </p>
+<table>
+<thead>
+<tr>
+<th>符号代号（Key Code）</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>扩展为 指定文件的路径名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>表示 Output -&gt; Name of Exectable:定义的工程名,比如<img src="/2019/08/03/KEIL-MDK生成BIN文件的两种方式/3.png" alt="test1build">工程后，最终生成的bin文件名称将是test1.bin</td>
+</tr>
+<tr>
+<td>!</td>
+<td>当前目录下的扩展路径      !L编译(Build)后，就是 .\obj\xx.axf文件</td>
+</tr>
+<tr>
+<td>文件代号（File Code）</td>
+<td></td>
+</tr>
+<tr>
+<td>K</td>
+<td>keil develop chaintool 工具链（fromelf.exe）</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Linker output fileL.bin        编译后，生成的就是最终的xx.bin文件</td>
+</tr>
+</tbody>
+</table>
+<p>​    </p>
+<h2 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3 参考资料"></a>3 参考资料</h2><p>1.原文链接(Keil官方)：Key Sequence for Tool Parameters<br><a href="http://www.keil.com/support/man/docs/uv4/uv4_ut_keysequence.htm" target="_blank" rel="noopener">http://www.keil.com/support/man/docs/uv4/uv4_ut_keysequence.htm</a></p>
+<p>2.<a href="https://blog.csdn.net/veabol/article/details/52318694" target="_blank" rel="noopener">https://blog.csdn.net/veabol/article/details/52318694</a></p>
+<p>3.<a href="https://blog.csdn.net/nich2009/article/details/81124691" target="_blank" rel="noopener">https://blog.csdn.net/nich2009/article/details/81124691</a> </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/EGO电子烟控制板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2809,7 +3005,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
