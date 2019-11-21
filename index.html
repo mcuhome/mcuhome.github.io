@@ -327,6 +327,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/搭在Ubuntu中安装eclipse图文详解“/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="总结多年经验电子工程师的血泪和汗水">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="电子工程师成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/11/21/搭在Ubuntu中安装eclipse图文详解“/" class="post-title-link" itemprop="url">搭在Ubuntu中安装eclipse图文详解“</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-21 11:20:12 / 修改时间：11:30:06" itemprop="dateCreated datePublished" datetime="2019-11-21T11:20:12+08:00">2019-11-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>1.首先得先下载JDK和eclipse</strong></p>
+<p>jdk下载网址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>eclipse下载网址：<a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/heliossr1/" target="_blank" rel="noopener">http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/heliossr1/</a></p>
+<p><strong>2.安装JDK</strong><br>2.1解压JDK<br>将JDK解压到/opt/jvm文件夹下，所以得先在/opt下新建一个jvm文件夹，而要在opt文件夹下新建文件夹需要获取root权限，所以需要sudo指令。在/opt下新建文件夹jvm的指令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /opt/jvm</span><br></pre></td></tr></table></figure>
+<p>输入指令之后，需要输入密码才能够执行，输入密码的过程是不会显示出来的，直接输入密码按回车就可以了<br>2.2 创建完文件夹之后，需要将JDK复制到jvm文件夹下<br>采用的指令为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv jdk-8u151-linux-x64.tar.gz /opt/jvm （得先用su指令进入root权限)</span><br></pre></td></tr></table></figure>
+<p>2.3 解压JDK到/opt/jvm目录下.<br>首先得先进入到/opt/jvm目录下，通过指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/jvm</span><br></pre></td></tr></table></figure>
+<p>然后解压文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf jdk-8u121-linux-x64.tar.gz -C /opt</span><br></pre></td></tr></table></figure>
+<p>4.配置JDK的环境变量。<br>(1)打开 /etc/profile,打开指令：<strong>sudo vi /etc/profile</strong>。通过这条指令之后，会进入vim编辑器，要在vim编辑器里面插入数据需要使用i指令，vim的常用指令如下：<br>光标运动: h,j , k, l （上/下/左/右）<br>删除字符: x<br>删除行 : dd<br>模式退出 : Esc,Insert（或者i）<br>退出编辑器 : q<br>强制退出不保存: q!<br>运行shell命令 :sh（使用exit返回vi编辑器）<br>保存文件 :w<br>文本查找 : /<br>(2)打开文件后，在文件末尾加入以下语句,每条语句之间要空一行</p>
+<p><code>export JAVA_HOME=/opt/jvm/jdk1.8.0_191</code></p>
+<p><code>export JRE_HOME=${JAVA_HOME}/jre</code></p>
+<p><code>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:CLASSPATH</code></p>
+<p><code>export PATH=${JAVA_HOME}/bin:$PATH</code></p>
+<p>输入这个内容后需要先按ESC，再按“：”，最后输入wq回车，就能够退出保存<br>(3)查看JDK是否安装成功<br>先输入 source /etc/profile<br>然后输入 java -version<br>安装成功后会显示jdk版本</p>
+<p>3.安装eclipse<br>3.1将eclipse解压到/opt文件夹下<br>首先，用su获取root权限，然后将eclipse剪切到/opt文件夹下</p>
+<p>然后，解压eclipse到/opt文件夹下，指令为：sudo tar zxvf eclipse-inst-linux64.tar.gz -C /opt/</p>
+<p>3.2创建eclipse桌面快捷图标<br>首先输入指令： cd /usr/share/applications<br>然后输入指令： sudo vim eclipse.desktop</p>
+<p>最后将下面的代码复制到文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name=Eclipse</span><br><span class="line">Comment=Eclipse</span><br><span class="line">Exec=/opt/eclipse-installer/eclipse-inst</span><br><span class="line">Icon=/opt/eclipse-installer/icon.xpm</span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=true</span><br><span class="line">Type=Application</span><br><span class="line">Categories=Application;Development;</span><br></pre></td></tr></table></figure>
+<p>其中“Exec=”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon=”后面为eclipse安装目录下的图标图片的路径</p>
+<p>3.3将eclipse变为可执行文件<br>指令为：sudo chmod u+x eclipse.desktop</p>
+<p>3.4 在/usr/share/applications目录下将Eclipse图标复制到桌面</p>
+<p>3.5点击图标下载相关的eclipse版本<br>————————————————<br>版权声明：本文为CSDN博主「spenglu」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/u013216156/article/details/78677740" target="_blank" rel="noopener">https://blog.csdn.net/u013216156/article/details/78677740</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/搭建-ESP32-开发环境-——-Hello-World/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2698,165 +2866,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/深圳的同学注意了，你可以免费下载知网论文/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="总结多年经验电子工程师的血泪和汗水">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="电子工程师成长之路">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/23/深圳的同学注意了，你可以免费下载知网论文/" class="post-title-link" itemprop="url">深圳的同学注意了，你也可以免费下载知网论文</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-23 15:23:10" itemprop="dateCreated datePublished" datetime="2019-05-23T15:23:10+08:00">2019-05-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-30 14:13:39" itemprop="dateModified" datetime="2019-05-30T14:13:39+08:00">2019-05-30</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>​    <a href="https://www.zhihu.com/question/20188973" target="_blank" rel="noopener">受知乎回答启发</a>，深圳的同学也能享受到免费下载知网的文章的便利，条件便是要拥有深圳图书馆的借书证。</p>
-<p>以下是操作步骤：</p>
-<p>​    1.先用借书证，登录深圳图书馆[<a href="https://www.szlib.org.cn/" target="_blank" rel="noopener">https://www.szlib.org.cn/</a> ],如图找到数字资源-<img src="/2019/05/23/深圳的同学注意了，你可以免费下载知网论文/zgzw.png" alt="&gt;中国知网">，<br>然后点击馆外访问，</p>
-<p><img src="/2019/05/23/深圳的同学注意了，你可以免费下载知网论文/zgzw2.png" alt="点击馆外访问">，然后就可以用知网下载了。</p>
-<p>怎么样，是不是很方便呢？</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2903,7 +2912,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
